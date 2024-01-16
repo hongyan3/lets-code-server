@@ -41,6 +41,9 @@ public class QuestionController {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         Question question = questionService.getById(questionId);
+        if (question == null) {
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
+        }
         QuestionVO questionVO = questionService.getQuestionVO(question);
         return ResultUtils.success(questionVO);
     }

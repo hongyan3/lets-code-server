@@ -16,10 +16,6 @@ public class QuestionAddRequest implements Serializable {
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
     /**
-     * 题目ID
-     */
-    private Long id;
-    /**
      * 标题
      */
     private String title;

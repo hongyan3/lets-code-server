@@ -33,6 +33,10 @@ public class QuestionVO implements Serializable {
      */
     private String description;
     /**
+     * 标准答案
+     */
+    private String answer;
+    /**
      * 标签 Json数组
      */
     private List<String> tags;
@@ -77,7 +81,7 @@ public class QuestionVO implements Serializable {
             return null;
         }
         QuestionVO questionVO = new QuestionVO();
-        BeanUtils.copyProperties(questionVO, question);
+        BeanUtils.copyProperties(question, questionVO);
         List<String> tagList = JSONUtil.toList(question.getTags(), String.class);
         questionVO.setTags(tagList);
         String judgeConfigStr = question.getJudgeConfig();
