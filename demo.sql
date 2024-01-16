@@ -1,60 +1,67 @@
--- MySQL dump 10.13  Distrib 8.2.0, for macos13 (arm64)
---
--- Host: 127.0.0.1    Database: demo
--- ------------------------------------------------------
--- Server version	8.2.0
+CREATE TABLE `user`
+(
+    `id`           bigint PRIMARY KEY NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+    `user_name`    varchar(30)        NOT NULL COMMENT '用户名',
+    `user_account` varchar(30)        NOT NULL COMMENT '用户账号',
+    `user_avatar`  varchar(256)                DEFAULT NULL COMMENT '用户头像',
+    `gender`       tinyint                     DEFAULT NULL COMMENT '性别 1-男 2-女 3-保密',
+    `password`     varchar(256)       NOT NULL COMMENT '密码',
+    `role`         tinyint(1) NOT NULL DEFAULT '1' COMMENT '角色 1-普通用户 2-管理员',
+    `status`       tinyint(1) NOT NULL DEFAULT '1' COMMENT '用户状态 0-禁用 1-正常',
+    `create_time`  datetime           NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`  datetime           NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `is_delete`    tinyint(1) NOT NULL DEFAULT '1' COMMENT '逻辑删除 0-删除 1-正常'
+);
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE TABLE `question`
+(
+    `id`           bigint auto_increment primary key comment '题目ID',
+    `title`        varchar(30)                        not null comment '标题',
+    `description`  text comment '问题描述',
+    `tags`         text comment '标签 Json数组',
+    `answer`       text comment '标准答案',
+    `submit_num`   int      default 0                 not null comment '总提交数',
+    `access_num`   int      default 0                 not null comment '总通过数',
+    `judge_case`   text comment '判题用例 Json数组',
+    `judge_config` text comment '判题配置 Json',
+    `user_id`      bigint comment '创建者ID',
+    `create_time`  datetime default CURRENT_TIMESTAMP not null comment '创建时间',
+    `update_time`  datetime default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP not null comment '更新时间',
+    `is_delete`    tinyint(1) default 1 comment '逻辑删除 0-删除 1-正常',
+    index          idx_user_id (user_id)
+);
 
---
--- Table structure for table `user`
---
-
-DROP TABLE IF EXISTS `user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user` (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '用户ID',
-  `user_name` varchar(30) NOT NULL COMMENT '用户名',
-  `user_account` varchar(30) NOT NULL COMMENT '用户账号',
-  `user_avatar` varchar(256) DEFAULT NULL COMMENT '用户头像',
-  `gender` tinyint DEFAULT NULL COMMENT '性别 1-男 2-女 3-保密',
-  `password` varchar(256) NOT NULL COMMENT '密码',
-  `role` tinyint(1) NOT NULL DEFAULT '1' COMMENT '角色 1-普通用户 2-管理员',
-  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '用户状态 1-正常 2-禁用',
-  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `is_delete` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `user`
---
-
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'汐源','xiyuan',NULL,NULL,'b40b42172b5792c519aa1d2a0e5a175d',2,1,'2023-12-22 02:59:11','2023-12-22 02:59:11',0);
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2023-12-23  2:44:58
+CREATE TABLE IF NOT EXISTS `question_submit`
+(
+    `id`
+    bigint
+    auto_increment
+    primary
+    key
+    comment
+    '题目ID',
+    `language`
+    varchar
+(
+    30
+) not null comment '编程语言',
+    `code` text not null comment '提交代码',
+    `judge_info` text comment '判题信息 Json',
+    `status` int default 0 not null comment '判题状态 0-待判题 1-判题中 2-成功 3-失败',
+    `question_id` bigint not null comment '题目ID',
+    `user_id` bigint comment '创建者ID',
+    `create_time` datetime default CURRENT_TIMESTAMP not null comment '创建时间',
+    `update_time` datetime default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP not null comment '更新时间',
+    `is_delete` tinyint
+(
+    1
+) default 1 comment '逻辑删除 0-删除 1-正常',
+    index idx_user_id
+(
+    user_id
+),
+    index idx_question_id
+(
+    user_id
+)
+    ) comment '题目提交表';

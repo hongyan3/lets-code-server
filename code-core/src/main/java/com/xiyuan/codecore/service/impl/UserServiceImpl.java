@@ -1,19 +1,19 @@
-package com.xiyuan.project.service.impl;
+package com.xiyuan.codecore.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.xiyuan.project.common.ErrorCode;
-import com.xiyuan.project.constant.CommonConstant;
-import com.xiyuan.project.constant.UserConstant;
-import com.xiyuan.project.exception.BusinessException;
-import com.xiyuan.project.mapper.UserMapper;
-import com.xiyuan.project.model.dto.user.UserQueryRequest;
-import com.xiyuan.project.model.entity.User;
-import com.xiyuan.project.model.enums.UserRoleEnum;
-import com.xiyuan.project.model.vo.UserVO;
-import com.xiyuan.project.service.UserService;
-import com.xiyuan.project.utils.SqlUtils;
+import com.xiyuan.codecore.common.ErrorCode;
+import com.xiyuan.codecore.constant.CommonConstant;
+import com.xiyuan.codecore.constant.UserConstant;
+import com.xiyuan.codecore.exception.BusinessException;
+import com.xiyuan.codecore.mapper.UserMapper;
+import com.xiyuan.codecore.model.dto.user.UserQueryRequest;
+import com.xiyuan.codecore.model.entity.User;
+import com.xiyuan.codecore.model.enums.UserRoleEnum;
+import com.xiyuan.codecore.model.vo.UserVO;
+import com.xiyuan.codecore.service.UserService;
+import com.xiyuan.codecore.utils.SqlUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -26,21 +26,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
-* @author xiyuan
-* @description 针对表【user】的数据库操作Service实现
-* @createDate 2023-12-21 22:24:11
-*/
+ * @author xiyuan
+ * @description 针对表【user】的数据库操作Service实现
+ * @createDate 2023-12-21 22:24:11
+ */
 @Service
 @Slf4j
 public class UserServiceImpl extends ServiceImpl<UserMapper, User>
-    implements UserService {
+        implements UserService {
 
     /**
      * 盐值，混淆密码
      */
     private static final String SALT = "xiyuan";
+
     @Override
-    public long userRegister(String userAccount, String userName,String userPassword, String checkPassword) {
+    public long userRegister(String userAccount, String userName, String userPassword, String checkPassword) {
         // 1. 校验
         if (StringUtils.isAnyBlank(userAccount, userName, userPassword, checkPassword)) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "参数为空");
@@ -102,6 +103,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             log.info("user login failed, userAccount cannot match userPassword");
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户不存在或密码错误");
         }
+        // 账号被禁用
+        if (user.getStatus() == 0) {
+            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "账号被禁用");
+        }
         // 3. 记录用户的登录态
         request.getSession().setAttribute(UserConstant.USER_LOGIN_STATE, user);
         return this.getUserVO(user);
@@ -138,7 +143,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
     @Override
     public boolean isAdmin(User user) {
-        return user != null && UserRoleEnum.ADMIN.getValue()==user.getRole();
+        return user != null && UserRoleEnum.ADMIN.getValue() == user.getRole();
     }
 
     @Override
@@ -181,7 +186,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         String sortOrder = userQueryRequest.getSortOrder();
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq(id != null, "id", id);
-        queryWrapper.eq(userRole != null,"role", userRole);
+        queryWrapper.eq(userRole != null, "role", userRole);
         queryWrapper.like(StringUtils.isNotBlank(userName), "user_name", userName);
         queryWrapper.orderBy(SqlUtils.validSortField(sortField), sortOrder.equals(CommonConstant.SORT_ORDER_ASC),
                 sortField);

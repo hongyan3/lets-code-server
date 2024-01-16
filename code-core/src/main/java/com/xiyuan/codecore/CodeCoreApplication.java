@@ -1,4 +1,4 @@
-package com.xiyuan.project;
+package com.xiyuan.codecore;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -6,12 +6,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @SpringBootApplication
-@MapperScan("com.xiyuan.project.mapper")
+@MapperScan("com.xiyuan.codecore.mapper")
 @EnableAspectJAutoProxy(proxyTargetClass = true, exposeProxy = true)
-public class SpringbootInitApplication {
+public class CodeCoreApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringbootInitApplication.class, args);
+        SpringApplication.run(CodeCoreApplication.class, args);
     }
 
 }

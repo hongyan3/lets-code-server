@@ -1,4 +1,4 @@
-package com.xiyuan.project.config;
+package com.xiyuan.codecore.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@MapperScan("com.xiyuan.project.mapper")
+@MapperScan("com.xiyuan.codecore.mapper")
 public class MyBatisPlusConfig {
 
     /**

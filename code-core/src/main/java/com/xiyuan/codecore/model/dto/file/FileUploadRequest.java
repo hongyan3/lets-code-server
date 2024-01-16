@@ -1,4 +1,4 @@
-package com.xiyuan.project.model.dto.file;
+package com.xiyuan.codecore.model.dto.file;
 
 import lombok.Data;
 
@@ -9,11 +9,10 @@ import java.io.Serializable;
  */
 @Data
 public class FileUploadRequest implements Serializable {
+    private static final long serialVersionUID = 1L;
     /**
      * 业务
      */
     private String business;
-
-    private static final long serialVersionUID = 1L;
 
 }

@@ -1,4 +1,4 @@
-package com.xiyuan.project.constant;
+package com.xiyuan.codecore.constant;
 
 public interface FileConstant {
     String File_Host = "http://127.0.0.1:8080/api/resource";

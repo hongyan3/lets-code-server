@@ -1,16 +1,14 @@
-package com.xiyuan.project.exception;
+package com.xiyuan.codecore.exception;
 
-import com.xiyuan.project.common.BaseResponse;
-import com.xiyuan.project.common.ErrorCode;
-import com.xiyuan.project.common.ResultUtils;
+import com.xiyuan.codecore.common.BaseResponse;
+import com.xiyuan.codecore.common.ErrorCode;
+import com.xiyuan.codecore.common.ResultUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * 全局异常处理器
- *
-
  */
 @RestControllerAdvice
 @Slf4j

@@ -1,20 +1,21 @@
-package com.xiyuan.project.controller.admin;
+package com.xiyuan.codecore.controller.admin;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.xiyuan.project.annotation.AuthCheck;
-import com.xiyuan.project.common.BaseResponse;
-import com.xiyuan.project.common.ErrorCode;
-import com.xiyuan.project.common.ResultUtils;
-import com.xiyuan.project.exception.BusinessException;
-import com.xiyuan.project.exception.ThrowUtils;
-import com.xiyuan.project.model.dto.user.UserAddRequest;
-import com.xiyuan.project.model.dto.user.UserQueryRequest;
-import com.xiyuan.project.model.dto.user.UserUpdateRequest;
-import com.xiyuan.project.model.entity.User;
-import com.xiyuan.project.model.enums.UserRoleEnum;
-import com.xiyuan.project.service.UserService;
+import com.xiyuan.codecore.annotation.AuthCheck;
+import com.xiyuan.codecore.common.BaseResponse;
+import com.xiyuan.codecore.common.ErrorCode;
+import com.xiyuan.codecore.common.ResultUtils;
+import com.xiyuan.codecore.exception.BusinessException;
+import com.xiyuan.codecore.exception.ThrowUtils;
+import com.xiyuan.codecore.model.dto.user.UserAddRequest;
+import com.xiyuan.codecore.model.dto.user.UserQueryRequest;
+import com.xiyuan.codecore.model.dto.user.UserUpdateRequest;
+import com.xiyuan.codecore.model.entity.User;
+import com.xiyuan.codecore.model.enums.UserRoleEnum;
+import com.xiyuan.codecore.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 public class UserAdminController {
     @Resource
     private UserService userService;
+
     /**
      * 创建用户（仅管理员）
      *
@@ -48,6 +50,7 @@ public class UserAdminController {
         ThrowUtils.throwIf(!result, ErrorCode.OPERATION_ERROR);
         return ResultUtils.success(user.getId());
     }
+
     /**
      * 删除用户(仅管理员)
      *
@@ -114,7 +117,7 @@ public class UserAdminController {
      */
     @GetMapping("/{userId}")
     @AuthCheck(AccessRole = UserRoleEnum.ADMIN)
-    public BaseResponse<User> getUserById(@PathVariable Long userId,HttpServletRequest request) {
+    public BaseResponse<User> getUserById(@PathVariable Long userId, HttpServletRequest request) {
         if (userId <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }

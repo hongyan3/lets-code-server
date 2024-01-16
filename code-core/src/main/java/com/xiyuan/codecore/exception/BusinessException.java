@@ -1,9 +1,10 @@
-package com.xiyuan.project.exception;
-import com.xiyuan.project.common.ErrorCode;
+package com.xiyuan.codecore.exception;
+
+import com.xiyuan.codecore.common.ErrorCode;
 import lombok.Getter;
 
 @Getter
-public class BusinessException extends RuntimeException{
+public class BusinessException extends RuntimeException {
 
     /**
      * 错误码

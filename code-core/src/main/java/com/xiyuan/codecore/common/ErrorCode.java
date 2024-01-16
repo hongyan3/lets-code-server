@@ -1,11 +1,9 @@
-package com.xiyuan.project.common;
+package com.xiyuan.codecore.common;
 
 import lombok.Getter;
 
 /**
  * 自定义错误码
- *
-
  */
 @Getter
 public enum ErrorCode {

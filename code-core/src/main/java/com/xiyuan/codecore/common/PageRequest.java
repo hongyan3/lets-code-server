@@ -1,6 +1,6 @@
-package com.xiyuan.project.common;
+package com.xiyuan.codecore.common;
 
-import com.xiyuan.project.constant.CommonConstant;
+import com.xiyuan.codecore.constant.CommonConstant;
 import lombok.Data;
 
 @Data

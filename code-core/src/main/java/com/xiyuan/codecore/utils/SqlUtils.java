@@ -1,4 +1,4 @@
-package com.xiyuan.project.utils;
+package com.xiyuan.codecore.utils;
 
 import org.apache.commons.lang3.StringUtils;
 

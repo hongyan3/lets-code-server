@@ -1,10 +1,10 @@
-package com.xiyuan.project;
+package com.xiyuan.codecore;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringbootInitApplicationTests {
+class CodeCoreApplicationTests {
 
     @Test
     void contextLoads() {

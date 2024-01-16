@@ -1,11 +1,9 @@
-package com.xiyuan.project.exception;
+package com.xiyuan.codecore.exception;
 
-import com.xiyuan.project.common.ErrorCode;
+import com.xiyuan.codecore.common.ErrorCode;
 
 /**
  * 抛异常工具类
- *
-
  */
 public class ThrowUtils {
 

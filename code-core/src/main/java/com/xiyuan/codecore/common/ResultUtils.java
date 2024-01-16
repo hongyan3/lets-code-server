@@ -1,9 +1,7 @@
-package com.xiyuan.project.common;
+package com.xiyuan.codecore.common;
 
 /**
  * 返回工具类
- *
-
  */
 public class ResultUtils {
 

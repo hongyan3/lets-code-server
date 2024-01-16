@@ -1,4 +1,4 @@
-package com.xiyuan.project.interceptor;
+package com.xiyuan.codecore.interceptor;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

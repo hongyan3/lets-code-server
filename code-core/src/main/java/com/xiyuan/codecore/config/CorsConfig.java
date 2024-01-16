@@ -1,4 +1,4 @@
-package com.xiyuan.project.config;
+package com.xiyuan.codecore.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

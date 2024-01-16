@@ -1,4 +1,4 @@
-package com.xiyuan.project.model.enums;
+package com.xiyuan.codecore.model.enums;
 
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import lombok.Getter;
@@ -9,13 +9,15 @@ import java.util.stream.Collectors;
 
 @Getter
 public enum FileUploadBusinessEnum {
-    USER_AVATAR("用户头像","user_avatar");
+    USER_AVATAR("用户头像", "user_avatar");
     private final String text;
     private final String value;
-    FileUploadBusinessEnum(String text,String value) {
+
+    FileUploadBusinessEnum(String text, String value) {
         this.text = text;
         this.value = value;
     }
+
     /**
      * 获取值列表
      *

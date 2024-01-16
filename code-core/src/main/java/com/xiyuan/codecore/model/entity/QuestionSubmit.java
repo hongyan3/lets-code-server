@@ -1,49 +1,53 @@
-package com.xiyuan.codecore.model.vo;
+package com.xiyuan.codecore.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 已登录用户视图（脱敏）
- **/
+ * 题目提交表
+ *
+ * @TableName question_submit
+ */
+@TableName(value = "question_submit")
 @Data
-public class UserVO implements Serializable {
+public class QuestionSubmit implements Serializable {
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
     /**
-     * 用户ID
+     * 题目ID
      */
     @TableId(type = IdType.AUTO)
     private Long id;
     /**
-     * 用户名
+     * 编程语言
      */
-    private String userName;
+    private String language;
     /**
-     * 用户账号
+     * 提交代码
      */
-    private String userAccount;
+    private String code;
     /**
-     * 用户头像
+     * 判题信息 Json
      */
-    private String userAvatar;
+    private String judgeInfo;
     /**
-     * 性别 1-男 2-女 3-保密
-     */
-    private Integer gender;
-    /**
-     * 角色 1-普通用户 2-管理员
-     */
-    private Integer role;
-    /**
-     * 用户状态 1-正常 2-禁用
+     * 判题状态 0-待判题 1-判题中 2-成功 3-失败
      */
     private Integer status;
+    /**
+     * 题目ID
+     */
+    private Long questionId;
+    /**
+     * 创建者ID
+     */
+    private Long userId;
     /**
      * 创建时间
      */

@@ -1,19 +1,19 @@
-package com.xiyuan.project.service;
+package com.xiyuan.codecore.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.xiyuan.project.model.dto.user.UserQueryRequest;
-import com.xiyuan.project.model.entity.User;
-import com.xiyuan.project.model.vo.UserVO;
+import com.xiyuan.codecore.model.dto.user.UserQueryRequest;
+import com.xiyuan.codecore.model.entity.User;
+import com.xiyuan.codecore.model.vo.UserVO;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
-* @author xiyuan
-* @description 针对表【user】的数据库操作Service
-* @createDate 2023-12-21 22:24:11
-*/
+ * @author xiyuan
+ * @description 针对表【user】的数据库操作Service
+ * @createDate 2023-12-21 22:24:11
+ */
 public interface UserService extends IService<User> {
     /**
      * 用户注册
@@ -23,7 +23,8 @@ public interface UserService extends IService<User> {
      * @param checkPassword 校验密码
      * @return 新用户 id
      */
-    long userRegister(String userAccount,String userName, String userPassword, String checkPassword);
+    long userRegister(String userAccount, String userName, String userPassword, String checkPassword);
+
     /**
      * 用户登录
      *
@@ -33,6 +34,7 @@ public interface UserService extends IService<User> {
      * @return 脱敏后的用户信息
      */
     UserVO userLogin(String userAccount, String userPassword, HttpServletRequest request);
+
     /**
      * 获取当前登录用户
      *
@@ -43,10 +45,12 @@ public interface UserService extends IService<User> {
 
     /**
      * 获取密码加密
+     *
      * @param password
      * @return
      */
     String EncryptPassword(String password);
+
     /**
      * 是否为管理员
      *
@@ -54,6 +58,7 @@ public interface UserService extends IService<User> {
      * @return
      */
     boolean isAdmin(HttpServletRequest request);
+
     /**
      * 是否为管理员
      *
@@ -61,6 +66,7 @@ public interface UserService extends IService<User> {
      * @return
      */
     boolean isAdmin(User user);
+
     /**
      * 用户注销
      *
@@ -68,12 +74,14 @@ public interface UserService extends IService<User> {
      * @return
      */
     boolean userLogout(HttpServletRequest request);
+
     /**
      * 获取脱敏的已登录用户信息
      *
      * @return
      */
     UserVO getUserVO(User user);
+
     /**
      * 获取脱敏的用户信息
      *
@@ -81,6 +89,7 @@ public interface UserService extends IService<User> {
      * @return
      */
     List<UserVO> getUserVO(List<User> userList);
+
     /**
      * 获取查询条件
      *

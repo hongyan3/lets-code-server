@@ -1,17 +1,18 @@
-package com.xiyuan.project.controller;
+package com.xiyuan.codecore.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.xiyuan.project.annotation.AuthCheck;
-import com.xiyuan.project.common.BaseResponse;
-import com.xiyuan.project.common.ErrorCode;
-import com.xiyuan.project.common.ResultUtils;
-import com.xiyuan.project.exception.BusinessException;
-import com.xiyuan.project.exception.ThrowUtils;
-import com.xiyuan.project.model.dto.user.*;
-import com.xiyuan.project.model.entity.User;
-import com.xiyuan.project.model.enums.UserRoleEnum;
-import com.xiyuan.project.model.vo.UserVO;
-import com.xiyuan.project.service.UserService;
+import com.xiyuan.codecore.common.BaseResponse;
+import com.xiyuan.codecore.common.ErrorCode;
+import com.xiyuan.codecore.common.ResultUtils;
+import com.xiyuan.codecore.exception.BusinessException;
+import com.xiyuan.codecore.exception.ThrowUtils;
+import com.xiyuan.codecore.model.dto.user.UserEditRequest;
+import com.xiyuan.codecore.model.dto.user.UserLoginRequest;
+import com.xiyuan.codecore.model.dto.user.UserQueryRequest;
+import com.xiyuan.codecore.model.dto.user.UserRegisterRequest;
+import com.xiyuan.codecore.model.entity.User;
+import com.xiyuan.codecore.model.vo.UserVO;
+import com.xiyuan.codecore.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -23,7 +24,6 @@ import java.util.List;
 
 /**
  * 用户接口
- *
  */
 @RestController
 @RequestMapping("/user")
@@ -47,12 +47,13 @@ public class UserController {
         String userPassword = userRegisterRequest.getUserPassword();
         String checkPassword = userRegisterRequest.getCheckPassword();
         String userName = userRegisterRequest.getUserName();
-        if (StringUtils.isAnyBlank(userAccount, userPassword, checkPassword,userName)) {
+        if (StringUtils.isAnyBlank(userAccount, userPassword, checkPassword, userName)) {
             return null;
         }
         long result = userService.userRegister(userAccount, userName, userPassword, checkPassword);
         return ResultUtils.success(result);
     }
+
     /**
      * 用户登录
      *
@@ -73,6 +74,7 @@ public class UserController {
         UserVO userVO = userService.userLogin(userAccount, userPassword, request);
         return ResultUtils.success(userVO);
     }
+
     /**
      * 用户注销
      *
@@ -87,6 +89,7 @@ public class UserController {
         boolean result = userService.userLogout(request);
         return ResultUtils.success(result);
     }
+
     /**
      * 获取当前登录用户
      *
@@ -131,7 +134,7 @@ public class UserController {
      */
     @PutMapping
     public BaseResponse<Boolean> updateUser(@RequestBody UserEditRequest userUpdateMyRequest,
-                                              HttpServletRequest request) {
+                                            HttpServletRequest request) {
         if (userUpdateMyRequest == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }

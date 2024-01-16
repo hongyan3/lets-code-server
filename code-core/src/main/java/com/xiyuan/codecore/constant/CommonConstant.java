@@ -1,8 +1,7 @@
-package com.xiyuan.project.constant;
+package com.xiyuan.codecore.constant;
 
 /**
  * 通用常量
- *
  */
 public interface CommonConstant {
 

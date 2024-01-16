@@ -1,5 +1,5 @@
 server:
-  port:
+  port: 8090
   servlet:
     context-path: /api
     # cookie 30 天过期
@@ -7,16 +7,16 @@ server:
       cookie:
         max-age: 2592000
 spring:
-#  数据库配置
+  #  数据库配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/demo
+    url: jdbc:mysql://localhost:3306/lets_code
     username: root
     password: Sql123..
   # Redis 配置
   # todo 需替换配置，然后取消注释
   redis:
-    database: 0
+    database: 1
     host: xiyuan.link
     port: 6379
     timeout: 5000
@@ -27,9 +27,9 @@ spring:
   session:
     # todo 取消注释开启分布式 session（须先配置 Redis）
     store-type: redis
-    # 30 天过期
-    timeout: 2592000
-#  全局日期格式化返回
+    # 24H过期
+    timeout: 86400
+  #  全局日期格式化返回
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8

@@ -1,4 +1,4 @@
-package com.xiyuan.project.service;
+package com.xiyuan.codecore.service;
 
 import org.springframework.stereotype.Service;
 
@@ -7,5 +7,5 @@ import java.io.IOException;
 
 @Service
 public interface FileUploadService {
-    void UploadFileToLocal(String FilePath,File file) throws IOException;
+    void UploadFileToLocal(String FilePath, File file) throws IOException;
 }
