@@ -1,9 +1,6 @@
 package com.xiyuan.codecore.model.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -69,5 +66,6 @@ public class Question implements Serializable {
     /**
      * 逻辑删除 0-删除 1-正常
      */
+    @TableLogic
     private Integer isDelete;
 }
