@@ -9,6 +9,7 @@ import com.xiyuan.codecore.constant.UserConstant;
 import com.xiyuan.codecore.exception.BusinessException;
 import com.xiyuan.codecore.mapper.UserMapper;
 import com.xiyuan.codecore.model.dto.user.UserQueryRequest;
+import com.xiyuan.codecore.model.dto.user.UserRegisterRequest;
 import com.xiyuan.codecore.model.entity.User;
 import com.xiyuan.codecore.model.enums.UserRoleEnum;
 import com.xiyuan.codecore.model.vo.UserVO;
@@ -41,10 +42,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     private static final String SALT = "xiyuan";
 
     @Override
-    public long userRegister(String userAccount, String userName, String userPassword, String checkPassword) {
+    public Long userRegister(UserRegisterRequest registerRequest) {
+
+        String userAccount = registerRequest.getUserAccount();
+        String userName = registerRequest.getUserName();
+        String userPassword = registerRequest.getUserPassword();
+        String checkPassword = registerRequest.getCheckPassword();
+
         // 1. 校验
         if (StringUtils.isAnyBlank(userAccount, userName, userPassword, checkPassword)) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "参数为空");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "部分参数为空");
         }
         if (userAccount.length() < 4) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户账号过短");
@@ -92,7 +99,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "密码错误");
         }
         // 2. 加密
-        String encryptPassword = DigestUtils.md5DigestAsHex((SALT + userPassword).getBytes());
+        String encryptPassword = EncryptPassword(userPassword);
         // 查询用户是否存在
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_account", userAccount);

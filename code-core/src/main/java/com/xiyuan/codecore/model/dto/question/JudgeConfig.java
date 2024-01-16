@@ -1,8 +1,11 @@
 package com.xiyuan.codecore.model.dto.question;
 
+import lombok.Data;
+
 /**
  * 题目配置
  */
+@Data
 public class JudgeConfig {
     /**
      * 时间限制（ms）

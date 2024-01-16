@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 @TableName(value = "question_submit")
 @Data
-public class QuestionSubmitAddQueryRequest implements Serializable {
+public class QuestionSubmitAddRequest implements Serializable {
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
     /**

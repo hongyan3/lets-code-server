@@ -8,17 +8,25 @@ import com.xiyuan.codecore.constant.CommonConstant;
 import com.xiyuan.codecore.exception.BusinessException;
 import com.xiyuan.codecore.mapper.QuestionSubmitMapper;
 import com.xiyuan.codecore.model.dto.questionsubmit.JudgeInfo;
+import com.xiyuan.codecore.model.dto.questionsubmit.QuestionSubmitAddRequest;
 import com.xiyuan.codecore.model.dto.questionsubmit.QuestionSubmitQueryRequest;
+import com.xiyuan.codecore.model.entity.Question;
 import com.xiyuan.codecore.model.entity.QuestionSubmit;
 import com.xiyuan.codecore.model.entity.User;
+import com.xiyuan.codecore.model.enums.QuestionSubmitLanguageEnum;
+import com.xiyuan.codecore.model.enums.QuestionSubmitStatusEnum;
 import com.xiyuan.codecore.model.vo.QuestionSubmitVO;
+import com.xiyuan.codecore.model.vo.UserVO;
+import com.xiyuan.codecore.service.QuestionService;
 import com.xiyuan.codecore.service.QuestionSubmitService;
+import com.xiyuan.codecore.service.UserService;
 import com.xiyuan.codecore.utils.SqlUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,6 +38,11 @@ import java.util.stream.Collectors;
 @Service
 public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper, QuestionSubmit>
         implements QuestionSubmitService {
+
+    @Resource
+    private UserService userService;
+    @Resource
+    private QuestionService questionService;
     @Override
     public void validQuestionSubmit(QuestionSubmit questionSubmit, boolean add) {
         if (questionSubmit == null) {
@@ -41,7 +54,7 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
         Long questionId = questionSubmit.getQuestionId();
         Long userId = questionSubmit.getUserId();
         if (add) {
-            if (StringUtils.isAnyBlank(language, code) || id != null) {
+            if (StringUtils.isAnyBlank(language, code)) {
                 throw new BusinessException(ErrorCode.PARAMS_ERROR);
             }
         }
@@ -95,12 +108,39 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
     public QuestionSubmitVO getQuestionSubmitVO(QuestionSubmit questionSubmit) {
         QuestionSubmitVO questionSubmitVO = QuestionSubmitVO.objToVo(questionSubmit);
         // 1. 关联查询用户信息
+        Long userId = questionSubmitVO.getUserId();
+        User user = userService.getById(userId);
+        UserVO userVO = userService.getUserVO(user);
+        questionSubmitVO.setUserInfo(userVO);
         return questionSubmitVO;
     }
 
     @Override
-    public Long submitQuestion(Long questionId, User loginUser) {
-        return null;
+    public Long submitQuestion(QuestionSubmitAddRequest addRequest, User loginUser) {
+        // 校验语言类型是否合法
+        String language = addRequest.getLanguage();
+        if (QuestionSubmitLanguageEnum.getEnumByValue(language) == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR,"语言类型错误");
+        }
+        Long questionId = addRequest.getQuestionId();
+        Question question = questionService.getById(questionId);
+        if (question == null) {
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
+        }
+        Long userId = loginUser.getId();
+        QuestionSubmit questionSubmit = new QuestionSubmit();
+        questionSubmit.setUserId(userId);
+        questionSubmit.setQuestionId(questionId);
+        questionSubmit.setLanguage(addRequest.getLanguage());
+        questionSubmit.setCode(addRequest.getCode());
+        // 设置初始状态
+        questionSubmit .setStatus(QuestionSubmitStatusEnum.WAITING.getValue());
+        questionSubmit.setJudgeInfo("{}");
+        boolean result = this.save(questionSubmit);
+        if (!result) {
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR);
+        }
+        return questionSubmit.getId();
     }
 }
 

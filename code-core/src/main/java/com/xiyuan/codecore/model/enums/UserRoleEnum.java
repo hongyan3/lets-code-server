@@ -24,7 +24,7 @@ public enum UserRoleEnum {
      * 根据roleCode获取枚举
      */
     public static UserRoleEnum getEnumByRoleCode(Integer roleCode) {
-        if (ObjectUtils.anyNotNull(roleCode)) {
+        if (roleCode == null) {
             return null;
         }
         for (UserRoleEnum roleEnum : UserRoleEnum.values()) {

@@ -83,6 +83,7 @@ public class QuestionAdminController {
         BeanUtils.copyProperties(addRequest, question);
         User loginUser = userService.getLoginUser(request);
         question.setUserId(loginUser.getId());
+        questionService.validQuestion(question,true);
         boolean result = questionService.save(question);
         ThrowUtils.throwIf(!result, ErrorCode.OPERATION_ERROR);
         return ResultUtils.success(question.getId());

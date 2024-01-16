@@ -3,6 +3,7 @@ package com.xiyuan.codecore.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.xiyuan.codecore.model.dto.questionsubmit.QuestionSubmitAddRequest;
 import com.xiyuan.codecore.model.dto.questionsubmit.QuestionSubmitQueryRequest;
 import com.xiyuan.codecore.model.entity.QuestionSubmit;
 import com.xiyuan.codecore.model.entity.User;
@@ -45,5 +46,5 @@ public interface QuestionSubmitService extends IService<QuestionSubmit> {
      */
     QuestionSubmitVO getQuestionSubmitVO(QuestionSubmit questionSubmit);
 
-    Long submitQuestion(Long questionId, User loginUser);
+    Long submitQuestion(QuestionSubmitAddRequest addRequest, User loginUser);
 }

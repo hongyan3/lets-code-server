@@ -44,7 +44,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
         String title = question.getTitle();
         Long id = question.getId();
         if (add) {
-            if (StringUtils.isAnyBlank(title) || id != null) {
+            if (StringUtils.isAnyBlank(title)) {
                 throw new BusinessException(ErrorCode.PARAMS_ERROR);
             }
         }

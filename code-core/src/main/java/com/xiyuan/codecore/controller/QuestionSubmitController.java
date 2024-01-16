@@ -1,7 +1,9 @@
 package com.xiyuan.codecore.controller;
 
 import com.xiyuan.codecore.common.BaseResponse;
-import com.xiyuan.codecore.model.dto.questionsubmit.QuestionSubmitAddQueryRequest;
+import com.xiyuan.codecore.common.ResultUtils;
+import com.xiyuan.codecore.model.dto.questionsubmit.QuestionSubmitAddRequest;
+import com.xiyuan.codecore.model.entity.User;
 import com.xiyuan.codecore.service.QuestionSubmitService;
 import com.xiyuan.codecore.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +23,9 @@ public class QuestionSubmitController {
     private UserService userService;
 
     @PostMapping
-    public BaseResponse<Long> submitQuestion(@RequestBody QuestionSubmitAddQueryRequest questionSubmitAddRequest, HttpServletRequest request) {
-        return null;
+    public BaseResponse<Long> submitQuestion(@RequestBody QuestionSubmitAddRequest questionSubmitAddRequest, HttpServletRequest request) {
+        User loginUser = userService.getLoginUser(request);
+        Long result = questionSubmitService.submitQuestion(questionSubmitAddRequest, loginUser);
+        return ResultUtils.success(result);
     }
 }
