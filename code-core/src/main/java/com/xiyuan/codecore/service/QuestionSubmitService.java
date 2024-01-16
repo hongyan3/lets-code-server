@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.xiyuan.codecore.model.dto.questionsubmit.QuestionSubmitQueryRequest;
 import com.xiyuan.codecore.model.entity.QuestionSubmit;
+import com.xiyuan.codecore.model.entity.User;
 import com.xiyuan.codecore.model.vo.QuestionSubmitVO;
 
 /**
@@ -39,8 +40,10 @@ public interface QuestionSubmitService extends IService<QuestionSubmit> {
     /**
      * 获取接口封装
      *
-     * @param question Entity
+     * @param questionSubmit Entity
      * @return
      */
-    QuestionSubmitVO getQuestionSubmitVO(QuestionSubmit question);
+    QuestionSubmitVO getQuestionSubmitVO(QuestionSubmit questionSubmit);
+
+    Long submitQuestion(Long questionId, User loginUser);
 }

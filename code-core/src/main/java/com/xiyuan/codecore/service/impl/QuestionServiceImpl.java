@@ -9,15 +9,18 @@ import com.xiyuan.codecore.exception.BusinessException;
 import com.xiyuan.codecore.mapper.QuestionMapper;
 import com.xiyuan.codecore.model.dto.question.QuestionQueryRequest;
 import com.xiyuan.codecore.model.entity.Question;
+import com.xiyuan.codecore.model.entity.User;
 import com.xiyuan.codecore.model.vo.QuestionVO;
+import com.xiyuan.codecore.model.vo.UserVO;
 import com.xiyuan.codecore.service.QuestionService;
+import com.xiyuan.codecore.service.UserService;
 import com.xiyuan.codecore.utils.SqlUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +32,9 @@ import java.util.stream.Collectors;
 @Service
 public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
         implements QuestionService {
+
+    @Resource
+    UserService userService;
 
     @Override
     public void validQuestion(Question question, boolean add) {
@@ -53,8 +59,8 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
         Long id = questionQueryRequest.getId();
         String title = questionQueryRequest.getTitle();
         String description = questionQueryRequest.getDescription();
-        String tags = questionQueryRequest.getTags();
         Long userId = questionQueryRequest.getUserId();
+        List<String> tags = questionQueryRequest.getTags();
         String sortField = questionQueryRequest.getSortField();
         String sortOrder = questionQueryRequest.getSortOrder();
         // 拼接查询Like条件
@@ -62,11 +68,13 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
             queryWrapper.like(ObjectUtils.allNotNull(title), "title", title)
                     .like(ObjectUtils.allNotNull(description), "description", description);
         }
+        if (!CollectionUtils.isEmpty(tags)) {
+            for (String tag : tags) {
+                queryWrapper.like("tags", "\"" + tag + "\"");
+            }
+        }
         queryWrapper.eq(ObjectUtils.allNotNull(id), "id", id);
-        queryWrapper.eq(ObjectUtils.allNotNull(description), "description", description);
-        queryWrapper.eq(ObjectUtils.allNotNull(tags), "tags", tags);
         queryWrapper.eq(ObjectUtils.allNotNull(id), "user_id", userId);
-        queryWrapper.eq("is_delete", 1);
         queryWrapper.orderBy(SqlUtils.validSortField(sortField),
                 sortOrder.equals(CommonConstant.SORT_ORDER_ASC), sortField);
         return queryWrapper;
@@ -86,8 +94,12 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
 
     @Override
     public QuestionVO getQuestionVO(Question question) {
-        QuestionVO questionVO = new QuestionVO();
-        BeanUtils.copyProperties(question, questionVO);
+        QuestionVO questionVO = QuestionVO.objToVo(question);
+        Long userId = questionVO.getUserId();
+        User user = userService.getById(userId);
+        UserVO userVO = userService.getUserVO(user);
+        // 1. 关联查询用户信息
+        questionVO.setUserInfo(userVO);
         return questionVO;
     }
 }

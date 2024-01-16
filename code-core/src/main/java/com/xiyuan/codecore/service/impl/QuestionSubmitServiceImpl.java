@@ -14,7 +14,6 @@ import com.xiyuan.codecore.service.QuestionSubmitService;
 import com.xiyuan.codecore.utils.SqlUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -72,7 +71,6 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
         queryWrapper.eq(ObjectUtils.allNotNull(status), "status", status);
         queryWrapper.eq(ObjectUtils.allNotNull(questionId), "question_id", questionId);
         queryWrapper.eq(ObjectUtils.allNotNull(userId), "user_id", userId);
-        queryWrapper.eq("is_delete", 1);
         queryWrapper.orderBy(SqlUtils.validSortField(sortField),
                 sortOrder.equals(CommonConstant.SORT_ORDER_ASC), sortField);
         return queryWrapper;
@@ -92,8 +90,8 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
 
     @Override
     public QuestionSubmitVO getQuestionSubmitVO(QuestionSubmit questionSubmit) {
-        QuestionSubmitVO questionSubmitVO = new QuestionSubmitVO();
-        BeanUtils.copyProperties(questionSubmit, questionSubmitVO);
+        QuestionSubmitVO questionSubmitVO = QuestionSubmitVO.objToVo(questionSubmit);
+        // 1. 关联查询用户信息
         return questionSubmitVO;
     }
 }

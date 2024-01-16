@@ -1,11 +1,16 @@
 package com.xiyuan.codecore.model.vo;
 
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.xiyuan.codecore.model.dto.question.JudgeConfig;
+import com.xiyuan.codecore.model.entity.Question;
 import lombok.Data;
+import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @TableName question
@@ -30,11 +35,11 @@ public class QuestionVO implements Serializable {
     /**
      * 标签 Json数组
      */
-    private String tags;
+    private List<String> tags;
     /**
-     * 标准答案
+     * 判题配置 Json
      */
-    private String answer;
+    private JudgeConfig judgeConfig;
     /**
      * 总提交数
      */
@@ -44,17 +49,13 @@ public class QuestionVO implements Serializable {
      */
     private Integer accessNum;
     /**
-     * 判题用例 Json数组
-     */
-    private String judgeCase;
-    /**
-     * 判题配置 Json
-     */
-    private String judgeConfig;
-    /**
      * 创建者ID
      */
     private Long userId;
+    /**
+     * 创建人信息
+     */
+    private UserVO userInfo;
     /**
      * 创建时间
      */
@@ -63,4 +64,41 @@ public class QuestionVO implements Serializable {
      * 更新时间
      */
     private Date updateTime;
+
+    /**
+     * 对象对VO包装类
+     *
+     * @param question
+     * @return
+     */
+
+    public static QuestionVO objToVo(Question question) {
+        if (question == null) {
+            return null;
+        }
+        QuestionVO questionVO = new QuestionVO();
+        BeanUtils.copyProperties(questionVO, question);
+        List<String> tagList = JSONUtil.toList(question.getTags(), String.class);
+        questionVO.setTags(tagList);
+        String judgeConfigStr = question.getJudgeConfig();
+        questionVO.setJudgeConfig(JSONUtil.toBean(judgeConfigStr, JudgeConfig.class));
+        return questionVO;
+    }
+
+    public static Question VoToObj(QuestionVO questionVO) {
+        if (questionVO == null) {
+            return null;
+        }
+        Question question = new Question();
+        BeanUtils.copyProperties(questionVO, question);
+        List<String> tagList = questionVO.getTags();
+        if (tagList != null) {
+            question.setTags(JSONUtil.toJsonStr(tagList));
+        }
+        JudgeConfig judgeConfig = questionVO.getJudgeConfig();
+        if (judgeConfig != null) {
+            question.setJudgeConfig(JSONUtil.toJsonStr(judgeConfig));
+        }
+        return question;
+    }
 }

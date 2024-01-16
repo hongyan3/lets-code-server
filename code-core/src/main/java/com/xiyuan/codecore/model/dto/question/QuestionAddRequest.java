@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @TableName question
@@ -29,7 +30,7 @@ public class QuestionAddRequest implements Serializable {
     /**
      * 标签 Json数组
      */
-    private String tags;
+    private List<String> tags;
     /**
      * 标准答案
      */
@@ -37,9 +38,9 @@ public class QuestionAddRequest implements Serializable {
     /**
      * 判题用例 Json数组
      */
-    private String judgeCase;
+    private List<JudgeCase> judgeCase;
     /**
      * 判题配置 Json
      */
-    private String judgeConfig;
+    private JudgeConfig judgeConfig;
 }

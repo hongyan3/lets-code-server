@@ -7,6 +7,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @TableName question
@@ -31,7 +32,7 @@ public class QuestionQueryRequest extends PageRequest implements Serializable {
     /**
      * 标签 Json数组
      */
-    private String tags;
+    private List<String> tags;
     /**
      * 创建者ID
      */

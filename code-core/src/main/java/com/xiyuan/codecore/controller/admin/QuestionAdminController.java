@@ -90,6 +90,7 @@ public class QuestionAdminController {
 
     /**
      * 删除问题
+     *
      * @param questionId 路径参数id
      * @return 布尔值
      */
@@ -100,12 +101,13 @@ public class QuestionAdminController {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         boolean result = questionService.removeById(questionId);
-        ThrowUtils.throwIf(!result,ErrorCode.OPERATION_ERROR);
+        ThrowUtils.throwIf(!result, ErrorCode.OPERATION_ERROR);
         return ResultUtils.success(result);
     }
 
     /**
      * 更新问题
+     *
      * @param updateRequest
      * @return
      */
@@ -116,8 +118,8 @@ public class QuestionAdminController {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         Question question = new Question();
-        BeanUtils.copyProperties(updateRequest,question);
-        questionService.validQuestion(question,false);
+        BeanUtils.copyProperties(updateRequest, question);
+        questionService.validQuestion(question, false);
         Long id = updateRequest.getId();
         Question oldQuestion = questionService.getById(id);
         ThrowUtils.throwIf(oldQuestion == null, ErrorCode.NOT_FOUND_ERROR);
