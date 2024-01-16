@@ -1,11 +1,14 @@
 package com.xiyuan.codecore.model.dto.questionsubmit;
 
+import lombok.Data;
+
 /**
  * 题目配置
  */
+@Data
 public class JudgeInfo {
     /**
-     * 程序执行时间
+     * 程序执行信息
      */
     private String message;
     /**

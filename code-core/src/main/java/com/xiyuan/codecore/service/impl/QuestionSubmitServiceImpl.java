@@ -7,8 +7,10 @@ import com.xiyuan.codecore.common.ErrorCode;
 import com.xiyuan.codecore.constant.CommonConstant;
 import com.xiyuan.codecore.exception.BusinessException;
 import com.xiyuan.codecore.mapper.QuestionSubmitMapper;
+import com.xiyuan.codecore.model.dto.questionsubmit.JudgeInfo;
 import com.xiyuan.codecore.model.dto.questionsubmit.QuestionSubmitQueryRequest;
 import com.xiyuan.codecore.model.entity.QuestionSubmit;
+import com.xiyuan.codecore.model.entity.User;
 import com.xiyuan.codecore.model.vo.QuestionSubmitVO;
 import com.xiyuan.codecore.service.QuestionSubmitService;
 import com.xiyuan.codecore.utils.SqlUtils;
@@ -58,16 +60,17 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
 
         Long id = questionSubmitQueryRequest.getId();
         String language = questionSubmitQueryRequest.getLanguage();
-        String judgeInfo = questionSubmitQueryRequest.getJudgeInfo();
+        JudgeInfo judgeInfo = questionSubmitQueryRequest.getJudgeInfo();
         Integer status = questionSubmitQueryRequest.getStatus();
         Long questionId = questionSubmitQueryRequest.getQuestionId();
         Long userId = questionSubmitQueryRequest.getUserId();
         String sortField = questionSubmitQueryRequest.getSortField();
         String sortOrder = questionSubmitQueryRequest.getSortOrder();
 
+        queryWrapper.like(ObjectUtils.allNotNull(status),"judgeInfo","\""+judgeInfo.getMessage()+"\"");
+
         queryWrapper.eq(ObjectUtils.allNotNull(id), "id", id);
         queryWrapper.eq(ObjectUtils.allNotNull(language), "language", language);
-        queryWrapper.eq(ObjectUtils.allNotNull(judgeInfo), "tags", judgeInfo);
         queryWrapper.eq(ObjectUtils.allNotNull(status), "status", status);
         queryWrapper.eq(ObjectUtils.allNotNull(questionId), "question_id", questionId);
         queryWrapper.eq(ObjectUtils.allNotNull(userId), "user_id", userId);
@@ -93,6 +96,11 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
         QuestionSubmitVO questionSubmitVO = QuestionSubmitVO.objToVo(questionSubmit);
         // 1. 关联查询用户信息
         return questionSubmitVO;
+    }
+
+    @Override
+    public Long submitQuestion(Long questionId, User loginUser) {
+        return null;
     }
 }
 
