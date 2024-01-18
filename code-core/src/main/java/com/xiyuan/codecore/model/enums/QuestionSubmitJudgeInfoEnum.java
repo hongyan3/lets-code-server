@@ -13,7 +13,10 @@ import java.util.stream.Collectors;
 @Getter
 public enum QuestionSubmitJudgeInfoEnum {
     ACCEPTED("成功", "Accepted"),
-    WRONG_ANSWER("答案错误", "Wrong Answer");
+    WRONG_ANSWER("答案错误", "Wrong Answer"),
+    WAITING("等待中", "Waiting"),
+    TIME_LIMIT_EXCEEDED("时间超出限制", "Time Out"),
+    MEMORY_LIMIT_EXCEEDED("内存超出限制", "Memory Out");
 
     private final String text;
     private final String value;

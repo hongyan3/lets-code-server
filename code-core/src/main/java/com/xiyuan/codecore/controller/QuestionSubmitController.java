@@ -1,15 +1,16 @@
 package com.xiyuan.codecore.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xiyuan.codecore.common.BaseResponse;
 import com.xiyuan.codecore.common.ResultUtils;
 import com.xiyuan.codecore.model.dto.questionsubmit.QuestionSubmitAddRequest;
+import com.xiyuan.codecore.model.dto.questionsubmit.QuestionSubmitQueryRequest;
+import com.xiyuan.codecore.model.entity.QuestionSubmit;
 import com.xiyuan.codecore.model.entity.User;
+import com.xiyuan.codecore.model.vo.QuestionSubmitVO;
 import com.xiyuan.codecore.service.QuestionSubmitService;
 import com.xiyuan.codecore.service.UserService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -27,5 +28,15 @@ public class QuestionSubmitController {
         User loginUser = userService.getLoginUser(request);
         Long result = questionSubmitService.submitQuestion(questionSubmitAddRequest, loginUser);
         return ResultUtils.success(result);
+    }
+
+    @GetMapping
+    public BaseResponse<Page<QuestionSubmitVO>> getQuestionSubmitList(@ModelAttribute QuestionSubmitQueryRequest queryRequest, HttpServletRequest request) {
+        long current = queryRequest.getCurrent();
+        long pageSize = queryRequest.getPageSize();
+        User loginUser = userService.getLoginUser(request);
+        Page<QuestionSubmit> page = questionSubmitService.page(new Page<>(current, pageSize), questionSubmitService.getQueryWrapper(queryRequest));
+        Page<QuestionSubmitVO> questionSubmitVOPage = questionSubmitService.getQuestionSubmitVOPage(page, loginUser);
+        return ResultUtils.success(questionSubmitVOPage);
     }
 }

@@ -2,6 +2,7 @@ package com.xiyuan.codecore.model.enums;
 
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import lombok.Getter;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,9 +14,9 @@ import java.util.stream.Collectors;
 public enum QuestionSubmitLanguageEnum {
     JAVA("Java", "Java"),
 
-    CPLUSPLUS("C++","C++"),
+    CPLUSPLUS("C++", "C++"),
 
-    GOLANG("Golang","Golang");
+    GOLANG("Golang", "Golang");
     private final String text;
     private final String value;
 

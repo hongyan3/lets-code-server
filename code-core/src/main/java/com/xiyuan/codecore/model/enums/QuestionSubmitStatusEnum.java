@@ -1,7 +1,6 @@
 package com.xiyuan.codecore.model.enums;
 
 import lombok.Getter;
-import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.Arrays;
 import java.util.List;

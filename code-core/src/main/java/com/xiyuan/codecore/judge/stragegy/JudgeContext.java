@@ -1,2 +1,22 @@
-package com.xiyuan.codecore.judge.stragegy;public class JudgeContext {
+package com.xiyuan.codecore.judge.stragegy;
+
+import com.xiyuan.codecore.model.dto.question.JudgeCase;
+import com.xiyuan.codecore.model.dto.questionsubmit.JudgeInfo;
+import com.xiyuan.codecore.model.entity.Question;
+import com.xiyuan.codecore.model.entity.QuestionSubmit;
+import lombok.Data;
+
+import java.util.List;
+
+/**
+ * 判题策略上下文（用于定义在策略中传递的参数）
+ */
+@Data
+public class JudgeContext {
+    private JudgeInfo judgeInfo;
+    private List<String> inputList;
+    private List<String> outputList;
+    private List<JudgeCase> judgeCaseList;
+    private Question question;
+    private QuestionSubmit questionSubmit;
 }

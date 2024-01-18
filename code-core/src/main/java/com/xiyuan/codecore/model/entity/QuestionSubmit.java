@@ -1,7 +1,6 @@
 package com.xiyuan.codecore.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import com.xiyuan.codecore.model.vo.UserVO;
 import lombok.Data;
 
 import java.io.Serializable;

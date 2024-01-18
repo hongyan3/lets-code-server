@@ -6,7 +6,6 @@ import com.xiyuan.codecore.common.PageRequest;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 题目提交表
@@ -31,10 +30,6 @@ public class QuestionSubmitQueryRequest extends PageRequest implements Serializa
      */
     private String code;
     /**
-     * 判题信息 Json
-     */
-    private JudgeInfo judgeInfo;
-    /**
      * 判题状态 0-待判题 1-判题中 2-成功 3-失败
      */
     private Integer status;
@@ -46,12 +41,4 @@ public class QuestionSubmitQueryRequest extends PageRequest implements Serializa
      * 创建者ID
      */
     private Long userId;
-    /**
-     * 创建时间
-     */
-    private Date createTime;
-    /**
-     * 更新时间
-     */
-    private Date updateTime;
 }

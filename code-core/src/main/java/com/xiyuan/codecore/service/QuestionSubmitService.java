@@ -36,7 +36,7 @@ public interface QuestionSubmitService extends IService<QuestionSubmit> {
      * @param questionPage page对象
      * @return
      */
-    Page<QuestionSubmitVO> getQuestionSubmitVOPage(Page<QuestionSubmit> questionPage);
+    Page<QuestionSubmitVO> getQuestionSubmitVOPage(Page<QuestionSubmit> questionPage, User loginUser);
 
     /**
      * 获取接口封装
@@ -44,7 +44,7 @@ public interface QuestionSubmitService extends IService<QuestionSubmit> {
      * @param questionSubmit Entity
      * @return
      */
-    QuestionSubmitVO getQuestionSubmitVO(QuestionSubmit questionSubmit);
+    QuestionSubmitVO getQuestionSubmitVO(QuestionSubmit questionSubmit, User loginUser);
 
     Long submitQuestion(QuestionSubmitAddRequest addRequest, User loginUser);
 }
