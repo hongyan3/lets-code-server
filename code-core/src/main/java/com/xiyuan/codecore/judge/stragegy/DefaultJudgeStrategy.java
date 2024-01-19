@@ -1,9 +1,9 @@
 package com.xiyuan.codecore.judge.stragegy;
 
 import cn.hutool.json.JSONUtil;
+import com.xiyuan.codecommon.model.JudgeInfo;
 import com.xiyuan.codecore.model.dto.question.JudgeCase;
 import com.xiyuan.codecore.model.dto.question.JudgeConfig;
-import com.xiyuan.codecore.model.dto.questionsubmit.JudgeInfo;
 import com.xiyuan.codecore.model.entity.Question;
 import com.xiyuan.codecore.model.enums.QuestionSubmitJudgeInfoEnum;
 

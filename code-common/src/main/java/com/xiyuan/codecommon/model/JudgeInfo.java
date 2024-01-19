@@ -1,4 +1,4 @@
-package com.xiyuan.codecore.model.dto.questionsubmit;
+package com.xiyuan.codecommon.model;
 
 import lombok.Data;
 

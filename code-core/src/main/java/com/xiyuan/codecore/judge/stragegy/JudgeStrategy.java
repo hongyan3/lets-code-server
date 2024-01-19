@@ -1,6 +1,6 @@
 package com.xiyuan.codecore.judge.stragegy;
 
-import com.xiyuan.codecore.model.dto.questionsubmit.JudgeInfo;
+import com.xiyuan.codecommon.model.JudgeInfo;
 
 /**
  * 判题策略

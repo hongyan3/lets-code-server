@@ -1,10 +1,10 @@
 package com.xiyuan.codecore.judge.codesandbox.impl;
 
 import com.google.common.collect.Lists;
+import com.xiyuan.codecommon.model.JudgeInfo;
 import com.xiyuan.codecore.judge.codesandbox.CodeSandBox;
 import com.xiyuan.codecore.judge.codesandbox.model.ExecuteCodeRequest;
 import com.xiyuan.codecore.judge.codesandbox.model.ExecuteCodeResponse;
-import com.xiyuan.codecore.model.dto.questionsubmit.JudgeInfo;
 import com.xiyuan.codecore.model.enums.QuestionSubmitStatusEnum;
 
 /**

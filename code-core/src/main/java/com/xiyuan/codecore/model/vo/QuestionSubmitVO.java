@@ -3,7 +3,7 @@ package com.xiyuan.codecore.model.vo;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.xiyuan.codecore.model.dto.questionsubmit.JudgeInfo;
+import com.xiyuan.codecommon.model.JudgeInfo;
 import com.xiyuan.codecore.model.entity.QuestionSubmit;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;

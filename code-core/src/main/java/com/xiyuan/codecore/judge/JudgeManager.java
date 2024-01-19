@@ -1,10 +1,10 @@
 package com.xiyuan.codecore.judge;
 
+import com.xiyuan.codecommon.model.JudgeInfo;
 import com.xiyuan.codecore.judge.stragegy.DefaultJudgeStrategy;
 import com.xiyuan.codecore.judge.stragegy.JavaLanguageStrategy;
 import com.xiyuan.codecore.judge.stragegy.JudgeContext;
 import com.xiyuan.codecore.judge.stragegy.JudgeStrategy;
-import com.xiyuan.codecore.model.dto.questionsubmit.JudgeInfo;
 import com.xiyuan.codecore.model.entity.QuestionSubmit;
 import org.springframework.stereotype.Service;
 

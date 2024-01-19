@@ -1,6 +1,5 @@
-package com.xiyuan.codecore.judge.codesandbox.model;
+package com.xiyuan.codecommon.model;
 
-import com.xiyuan.codecommon.model.JudgeInfo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

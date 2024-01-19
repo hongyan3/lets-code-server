@@ -74,7 +74,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
             }
         }
         queryWrapper.eq(ObjectUtils.allNotNull(id), "id", id);
-        queryWrapper.eq(ObjectUtils.allNotNull(id), "user_id", userId);
+        queryWrapper.eq(ObjectUtils.allNotNull(userId), "user_id", userId);
         queryWrapper.orderBy(SqlUtils.validSortField(sortField),
                 sortOrder.equals(CommonConstant.SORT_ORDER_ASC), sortField);
         return queryWrapper;
