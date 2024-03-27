@@ -1,5 +1,6 @@
 package com.xiyuan.codesandbox.utils;
 
+import cn.hutool.core.date.StopWatch;
 import com.xiyuan.codesandbox.model.ExecuteMessage;
 
 import java.io.BufferedReader;
@@ -13,9 +14,12 @@ public class ProcessUtils {
      */
     public static ExecuteMessage runProcess(Process runProcess, String option) {
         ExecuteMessage executeMessage = new ExecuteMessage();
-
         try {
+            StopWatch stopWatch = new StopWatch();
+            stopWatch.start();
             int exitCode = runProcess.waitFor();
+            stopWatch.stop();
+            executeMessage.setTime(stopWatch.getTotalTimeMillis());
             executeMessage.setExitCode(exitCode);
             if (exitCode == 0) {
                 System.out.println(option + "成功");

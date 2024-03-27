@@ -3,34 +3,32 @@ package com.xiyuan.codecore.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.xiyuan.codecore.common.ErrorCode;
-import com.xiyuan.codecore.constant.CommonConstant;
-import com.xiyuan.codecore.exception.BusinessException;
-import com.xiyuan.codecore.judge.service.JudgeService;
+import com.xiyuan.codecommon.common.ErrorCode;
+import com.xiyuan.codecommon.model.enums.CommonConstant;
+import com.xiyuan.codecommon.exception.BusinessException;
 import com.xiyuan.codecore.mapper.QuestionSubmitMapper;
-import com.xiyuan.codecore.model.dto.questionsubmit.QuestionSubmitAddRequest;
-import com.xiyuan.codecore.model.dto.questionsubmit.QuestionSubmitQueryRequest;
-import com.xiyuan.codecore.model.entity.Question;
-import com.xiyuan.codecore.model.entity.QuestionSubmit;
-import com.xiyuan.codecore.model.entity.User;
-import com.xiyuan.codecore.model.enums.QuestionSubmitLanguageEnum;
-import com.xiyuan.codecore.model.enums.QuestionSubmitStatusEnum;
-import com.xiyuan.codecore.model.enums.UserRoleEnum;
-import com.xiyuan.codecore.model.vo.QuestionSubmitVO;
-import com.xiyuan.codecore.model.vo.UserVO;
+import com.xiyuan.codecommon.model.dto.questionsubmit.QuestionSubmitAddRequest;
+import com.xiyuan.codecommon.model.dto.questionsubmit.QuestionSubmitQueryRequest;
+import com.xiyuan.codecommon.model.entity.Question;
+import com.xiyuan.codecommon.model.entity.QuestionSubmit;
+import com.xiyuan.codecommon.model.entity.User;
+import com.xiyuan.codecommon.model.enums.QuestionSubmitLanguageEnum;
+import com.xiyuan.codecommon.model.enums.QuestionSubmitStatusEnum;
+import com.xiyuan.codecommon.model.enums.UserRoleEnum;
+import com.xiyuan.codecommon.model.vo.QuestionSubmitVO;
+import com.xiyuan.codecommon.model.vo.UserVO;
 import com.xiyuan.codecore.service.QuestionService;
 import com.xiyuan.codecore.service.QuestionSubmitService;
 import com.xiyuan.codecore.service.UserService;
+import com.xiyuan.codecore.producer.CodeJudgeProducer;
 import com.xiyuan.codecore.utils.SqlUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 /**
@@ -48,8 +46,7 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
     private QuestionService questionService;
 
     @Resource
-    @Lazy
-    private JudgeService judgeService;
+    private CodeJudgeProducer judgeProducer;
 
     @Override
     public void validQuestionSubmit(QuestionSubmit questionSubmit, boolean add) {
@@ -150,10 +147,11 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
             throw new BusinessException(ErrorCode.SYSTEM_ERROR);
         }
         // todo 执行判题服务
-        CompletableFuture.runAsync(() -> {
-            System.out.println("开始执行");
-            judgeService.doJudge(questionSubmit.getId());
-        });
+//        CompletableFuture.runAsync(() -> {
+//            System.out.println("开始执行");
+//            judgeService.doJudge(questionSubmit.getId());
+//        });
+        judgeProducer.sendMessage("code_queue", String.valueOf(questionSubmit.getId()));
         return questionSubmit.getId();
     }
 }

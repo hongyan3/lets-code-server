@@ -10,4 +10,5 @@ public class ExecuteMessage {
     private Integer exitCode;
     private String message;
     private String errMessage;
+    private Long time;
 }

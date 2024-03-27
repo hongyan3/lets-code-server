@@ -1,13 +1,13 @@
 package com.xiyuan.codecore.controller;
 
 import cn.hutool.core.io.FileUtil;
-import com.xiyuan.codecore.common.BaseResponse;
-import com.xiyuan.codecore.common.ErrorCode;
-import com.xiyuan.codecore.common.ResultUtils;
+import com.xiyuan.codecommon.common.BaseResponse;
+import com.xiyuan.codecommon.common.ErrorCode;
+import com.xiyuan.codecommon.common.ResultUtils;
 import com.xiyuan.codecore.constant.FileConstant;
-import com.xiyuan.codecore.exception.BusinessException;
-import com.xiyuan.codecore.model.entity.User;
-import com.xiyuan.codecore.model.enums.FileUploadBusinessEnum;
+import com.xiyuan.codecommon.exception.BusinessException;
+import com.xiyuan.codecommon.model.entity.User;
+import com.xiyuan.codecommon.model.enums.FileUploadBusinessEnum;
 import com.xiyuan.codecore.service.FileUploadService;
 import com.xiyuan.codecore.service.UserService;
 import lombok.extern.slf4j.Slf4j;

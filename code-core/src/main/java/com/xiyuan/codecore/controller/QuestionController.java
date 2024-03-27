@@ -1,14 +1,14 @@
 package com.xiyuan.codecore.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.xiyuan.codecore.common.BaseResponse;
-import com.xiyuan.codecore.common.ErrorCode;
-import com.xiyuan.codecore.common.ResultUtils;
-import com.xiyuan.codecore.exception.BusinessException;
-import com.xiyuan.codecore.exception.ThrowUtils;
-import com.xiyuan.codecore.model.dto.question.QuestionQueryRequest;
-import com.xiyuan.codecore.model.entity.Question;
-import com.xiyuan.codecore.model.vo.QuestionVO;
+import com.xiyuan.codecommon.common.BaseResponse;
+import com.xiyuan.codecommon.common.ErrorCode;
+import com.xiyuan.codecommon.common.ResultUtils;
+import com.xiyuan.codecommon.exception.BusinessException;
+import com.xiyuan.codecommon.exception.ThrowUtils;
+import com.xiyuan.codecommon.model.dto.question.QuestionQueryRequest;
+import com.xiyuan.codecommon.model.entity.Question;
+import com.xiyuan.codecommon.model.vo.QuestionVO;
 import com.xiyuan.codecore.service.QuestionService;
 import org.springframework.web.bind.annotation.*;
 

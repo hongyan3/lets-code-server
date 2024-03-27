@@ -1,10 +1,10 @@
 package com.xiyuan.codecore.interceptor;
 
 import com.xiyuan.codecore.annotation.AuthCheck;
-import com.xiyuan.codecore.common.ErrorCode;
-import com.xiyuan.codecore.exception.BusinessException;
-import com.xiyuan.codecore.model.entity.User;
-import com.xiyuan.codecore.model.enums.UserRoleEnum;
+import com.xiyuan.codecommon.common.ErrorCode;
+import com.xiyuan.codecommon.exception.BusinessException;
+import com.xiyuan.codecommon.model.entity.User;
+import com.xiyuan.codecommon.model.enums.UserRoleEnum;
 import com.xiyuan.codecore.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;

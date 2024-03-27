@@ -3,11 +3,11 @@ package com.xiyuan.codecore.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.xiyuan.codecore.model.dto.questionsubmit.QuestionSubmitAddRequest;
-import com.xiyuan.codecore.model.dto.questionsubmit.QuestionSubmitQueryRequest;
-import com.xiyuan.codecore.model.entity.QuestionSubmit;
-import com.xiyuan.codecore.model.entity.User;
-import com.xiyuan.codecore.model.vo.QuestionSubmitVO;
+import com.xiyuan.codecommon.model.dto.questionsubmit.QuestionSubmitAddRequest;
+import com.xiyuan.codecommon.model.dto.questionsubmit.QuestionSubmitQueryRequest;
+import com.xiyuan.codecommon.model.entity.QuestionSubmit;
+import com.xiyuan.codecommon.model.entity.User;
+import com.xiyuan.codecommon.model.vo.QuestionSubmitVO;
 
 /**
  * @author xiyuan

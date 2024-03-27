@@ -1,0 +1,28 @@
+
+server:
+  port: 8092
+  servlet:
+    context-path: /api
+spring:
+  application:
+    name: code-judge
+  cloud:
+    nacos:
+      discovery:
+        server-addr: zeekr.live:8848
+  rabbitmq:
+    host: zeekr.live
+    port: 5672
+    virtual-host: xiyuan
+    username: xiyuan
+    password: Sql123..
+  #  全局日期格式化返回
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+dubbo:
+  registry:
+    address: nacos://zeekr.live:8848
+codesandbox:
+  type: remote
+

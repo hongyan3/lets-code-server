@@ -1,6 +1,7 @@
 package com.xiyuan.codecore.config;
 
 import com.xiyuan.codecore.interceptor.LoginInterceptor;
+import com.xiyuan.codecore.interceptor.RequestInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

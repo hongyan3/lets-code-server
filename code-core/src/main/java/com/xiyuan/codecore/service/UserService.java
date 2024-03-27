@@ -1,11 +1,12 @@
 package com.xiyuan.codecore.service;
 
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.xiyuan.codecore.model.dto.user.UserQueryRequest;
-import com.xiyuan.codecore.model.dto.user.UserRegisterRequest;
-import com.xiyuan.codecore.model.entity.User;
-import com.xiyuan.codecore.model.vo.UserVO;
+import com.xiyuan.codecommon.model.dto.user.UserQueryRequest;
+import com.xiyuan.codecommon.model.dto.user.UserRegisterRequest;
+import com.xiyuan.codecommon.model.entity.User;
+import com.xiyuan.codecommon.model.vo.UserVO;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;

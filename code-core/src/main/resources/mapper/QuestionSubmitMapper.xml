@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xiyuan.codecore.mapper.QuestionSubmitMapper">
 
-    <resultMap id="BaseResultMap" type="com.xiyuan.codecore.model.entity.QuestionSubmit">
+    <resultMap id="BaseResultMap" type="com.xiyuan.codecommon.model.entity.QuestionSubmit">
         <id property="id" column="id" jdbcType="BIGINT"/>
         <result property="language" column="language" jdbcType="VARCHAR"/>
         <result property="code" column="code" jdbcType="VARCHAR"/>

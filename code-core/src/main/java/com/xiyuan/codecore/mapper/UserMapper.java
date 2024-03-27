@@ -1,7 +1,7 @@
 package com.xiyuan.codecore.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.xiyuan.codecore.model.entity.User;
+import com.xiyuan.codecommon.model.entity.User;
 
 /**
  * @author xiyuan

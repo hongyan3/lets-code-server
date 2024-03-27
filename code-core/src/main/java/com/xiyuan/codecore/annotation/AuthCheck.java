@@ -1,6 +1,6 @@
 package com.xiyuan.codecore.annotation;
 
-import com.xiyuan.codecore.model.enums.UserRoleEnum;
+import com.xiyuan.codecommon.model.enums.UserRoleEnum;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

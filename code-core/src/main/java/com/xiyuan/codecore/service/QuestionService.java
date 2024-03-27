@@ -3,9 +3,9 @@ package com.xiyuan.codecore.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.xiyuan.codecore.model.dto.question.QuestionQueryRequest;
-import com.xiyuan.codecore.model.entity.Question;
-import com.xiyuan.codecore.model.vo.QuestionVO;
+import com.xiyuan.codecommon.model.dto.question.QuestionQueryRequest;
+import com.xiyuan.codecommon.model.entity.Question;
+import com.xiyuan.codecommon.model.vo.QuestionVO;
 
 /**
  * @author xiyuan
